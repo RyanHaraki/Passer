@@ -2,6 +2,7 @@ package model;
 
 import java.util.List;
 
+// Class representing a WiFi password and its associated metadata
 public class WifiPassword {
     private String name;
     private String address;
