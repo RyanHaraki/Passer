@@ -35,3 +35,6 @@ easier to track.
 - As a user, I want to be able to delete passwords I'm no longer using
 - As a user, I want to be able to edit passwords and their metadata
 - As a user, I want to be able to view the password data associated with a name
+- As a user, whenever I add a new password, I want that password saved to a file
+- As a user, I want to be able to load my passwords from the file I saved them to
+- As a user, I want my edits to a password to be saved in the file that the password is stored

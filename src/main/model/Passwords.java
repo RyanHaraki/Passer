@@ -33,6 +33,6 @@ public class Passwords {
                 return password;
             }
         }
-        return null; // CHANGE THIS (maybe this works if if doesnt)
+        return null;
     }
 }
