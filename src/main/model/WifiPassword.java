@@ -1,9 +1,15 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.List;
 
+// CITATION: Parts of this code were adapted from JsonSerializerDemo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/
+
 // Class representing a WiFi password and its associated metadata
-public class WifiPassword {
+public class WifiPassword implements Writable {
     private String name;
     private String address;
     private String password;
@@ -87,6 +93,17 @@ public class WifiPassword {
     // EFFECTS: returns people associated with password
     public List<String> getPeople() {
         return this.people;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", this.name);
+        json.put("address", this.address);
+        json.put("devices", this.devices);
+        json.put("password", this.password);
+        json.put("people", this.people);
+        return json;
     }
 
 }

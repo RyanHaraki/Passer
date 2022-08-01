@@ -2,18 +2,27 @@ package ui;
 
 import model.Passwords;
 import model.WifiPassword;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 // Class representing the terminal application for a password tracker
 public class PasswordApp {
+    private static final String JSON_STORE = "./data/passwords.json";
     private Passwords passwords;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the teller application
-    public PasswordApp() {
+    public PasswordApp() throws FileNotFoundException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runPassword();
     }
 
@@ -31,6 +40,7 @@ public class PasswordApp {
             command = command.toLowerCase();
 
             if (command.equals("q")) {
+                savePasswords();
                 keepGoing = false;
             } else {
                 processCommand(command);
@@ -64,11 +74,12 @@ public class PasswordApp {
 
 
     // MODIFIES: this
-    // EFFECTS: initializes accounts
+    // EFFECTS: initializes accounts and loads passwords from JSON
     private void init() {
         passwords = new Passwords();
         input = new Scanner(System.in);
         input.useDelimiter("\n");
+        loadPasswords();
     }
 
     // EFFECTS: displays menu of options to user
@@ -271,5 +282,29 @@ public class PasswordApp {
         } else {
             System.out.println("Password not found.");
         }
+    }
+
+    // EFFECTS: saves passwords to a file
+    private void savePasswords() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(passwords);
+            jsonWriter.close();
+            System.out.println("Saved passwords to: " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads passwords from file
+    private void loadPasswords() {
+        try {
+            passwords = jsonReader.read();
+            System.out.println("Loaded passwords from: " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+
     }
 }
