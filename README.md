@@ -38,3 +38,19 @@ easier to track.
 - As a user, whenever I add a new password, I want that password saved to a file
 - As a user, I want to be able to load my passwords from the file I saved them to
 - As a user, I want my edits to a password to be saved in the file that the password is stored
+
+# Instructions for Grader
+### Generate "Add multiple X's to Y"
+- Fill out input fields
+- Click "Add" button
+New password should be visible in list of passwords, repeat as many times as you want (cannot add passwords with
+- duplicate names)
+### Find visual component:
+- Click "Save"
+- Enjoy the meme (enlarge window to see the whole gif)
+### Saving and Loading data
+- To save click "save", to load click "load" and JSON-stored passwords will be added to list
+### 2 Pieces of Extra functionality
+- Click on any of the passwords you see in the list - the text on the right should dynamically update with 
+the metadata of the selected password
+- Hit the "Display panel" button to open a new popup with the current passwords information
