@@ -54,3 +54,12 @@ New password should be visible in list of passwords, repeat as many times as you
 - Click on any of the passwords you see in the list - the text on the right should dynamically update with 
 the metadata of the selected password
 - Hit the "Display panel" button to open a new popup with the current passwords information
+
+### Example LogPrinter output 
+- Actions: added, deleted password
+
+`  Thu Aug 11 14:00:21 PDT 2022
+  Password added to list`
+
+  `Thu Aug 11 14:00:22 PDT 2022
+  Password removed`
