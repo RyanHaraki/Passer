@@ -63,3 +63,10 @@ the metadata of the selected password
 
   `Thu Aug 11 14:00:22 PDT 2022
   Password removed`
+  
+# Reflection
+
+The most significant refactor I would do is in the UI class. For the most-part, my models are well done (clean code, 
+well documented, readable) although I would make it more robust and add exception handling. My GUI is currently one massive file 
+that is over 500 lines of code long, poorly documented and is a mess to look through. I would extract the UI components into their own 
+custom classes as well as significantly reorganize the functions wihtin the main GUI class.
