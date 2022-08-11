@@ -1,7 +1,7 @@
 package ui;
 
-import model.Passwords;
-import model.WifiPassword;
+import model.*;
+import model.Event;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -183,7 +183,6 @@ public class PasswordGui extends JPanel implements ListSelectionListener {
             public void mouseClicked(MouseEvent e) {
                 String selectedItem = (String) list.getSelectedValue();
                 WifiPassword gotPass = passwordsList.getPasswordByName(selectedItem);
-                System.out.println(gotPass.getName());
                 passwordInfo.setText(displayPassword(gotPass));
             }
         };
@@ -292,7 +291,6 @@ public class PasswordGui extends JPanel implements ListSelectionListener {
 
             passwordsList.removePasswordByName(name);
             listModel.remove(index);
-            System.out.println("Removed: " + name);
 
             int size = listModel.getSize();
 
@@ -509,6 +507,12 @@ public class PasswordGui extends JPanel implements ListSelectionListener {
         }
     }
 
+    private static void displayLog(EventLog eventLog) {
+        for (Event event: eventLog) {
+            System.out.println(event.toString());
+        }
+    }
+
   // EFFECTS: creates and shows GUI
     private static void createAndShowGUI() {
         //Create and set up the window.
@@ -524,6 +528,14 @@ public class PasswordGui extends JPanel implements ListSelectionListener {
         //Display the window.
         frame.pack();
         frame.setVisible(true);
+
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                displayLog(EventLog.getInstance());
+                System.exit(0);
+            }
+        });
     }
 
     public static void main(String[] args) {

@@ -12,14 +12,16 @@ import java.util.List;
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/
 
 // Class representing a list of passwords
-public class Passwords implements Writable {
+public class Passwords extends Observable implements Writable {
     private List<WifiPassword> passwords = new ArrayList<WifiPassword>();
 
     // REQUIRES: password name does not already exist in Passwords
     // MODIFIES: this
     // EFFECTS: adds password to list of passwords
     public void addPassword(WifiPassword password) {
-        passwords.add(password);
+        this.passwords.add(password);
+        notifyObservers(password);
+        EventLog.getInstance().logEvent(new Event("Password added to list"));
     }
 
     // REQUIRES: name length is > 0
@@ -27,6 +29,13 @@ public class Passwords implements Writable {
     // EFFECTS: remove password from passwords based on the password name
     public void removePasswordByName(String name) {
         this.passwords.removeIf(password -> name.equals(password.getName()));
+        for (WifiPassword password: this.passwords) {
+            if (name.equals(password.getName())) {
+                notifyObservers(password);
+            }
+        }
+
+        EventLog.getInstance().logEvent(new Event("Password removed"));
     }
 
     // EFFECTS: returns an unmodifiable list of wifi passwords
@@ -61,4 +70,5 @@ public class Passwords implements Writable {
 
         return jsonArray;
     }
+
 }

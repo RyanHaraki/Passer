@@ -9,7 +9,7 @@ import java.util.List;
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/
 
 // Class representing a WiFi password and its associated metadata
-public class WifiPassword implements Writable {
+public class WifiPassword implements Writable, Observer {
     private String name;
     private String address;
     private String password;
@@ -106,4 +106,8 @@ public class WifiPassword implements Writable {
         return json;
     }
 
+    @Override
+    public void update(WifiPassword p) {
+        System.out.println("Password " + p.getName() + " added.");
+    }
 }
