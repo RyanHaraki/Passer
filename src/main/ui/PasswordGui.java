@@ -507,6 +507,7 @@ public class PasswordGui extends JPanel implements ListSelectionListener {
         }
     }
 
+    // EFFECTS: Displays a log of all the events taken in the app
     private static void displayLog(EventLog eventLog) {
         for (Event event: eventLog) {
             System.out.println(event.toString());
