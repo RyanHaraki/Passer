@@ -39,7 +39,7 @@ easier to track.
 - As a user, I want to be able to load my passwords from the file I saved them to
 - As a user, I want my edits to a password to be saved in the file that the password is stored
 
-# Instructions for Grader
+# Instructions for Use
 ### Generate "Add multiple X's to Y"
 - Fill out input fields
 - Click "Add" button
